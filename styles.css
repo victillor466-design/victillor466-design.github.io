@@ -1,0 +1,135 @@
+:root {
+  --tinta: #172033;
+  --base: #E9EDF2;
+  --panel: #FFFFFF;
+  --linea: #C9D1DC;
+  --tenue: #5B6676;
+  --ok: #0F8A4C;
+  --error: #C8102E;
+  --aviso: #B7791F;
+  --enfoque: #2563EB;
+  font-family: Roboto, "Segoe UI", system-ui, sans-serif;
+  color: var(--tinta);
+  background: var(--base);
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  -webkit-tap-highlight-color: transparent;
+}
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--enfoque); outline-offset: 2px; }
+
+/* Barra superior */
+.barra { background: var(--tinta); color: #fff; padding: 10px 14px 8px; }
+.barra-fila { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.marca { font-size: 1.05rem; letter-spacing: .01em; }
+.envio {
+  border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff;
+  border-radius: 999px; padding: 4px 10px; font-size: .8rem;
+}
+.envio.pendiente { background: var(--aviso); border-color: var(--aviso); }
+.envio.ok { background: var(--ok); border-color: var(--ok); }
+.quien {
+  margin-top: 6px; width: 100%; text-align: left; background: rgba(255,255,255,.08);
+  border: 0; border-radius: 6px; padding: 6px 8px; color: #fff; font-size: .9rem;
+}
+
+main { flex: 1; overflow-y: auto; }
+.vista { display: none; padding: 12px 14px 20px; }
+.vista.activa { display: block; }
+
+/* Lote actual */
+.lote {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  font-weight: 700; font-size: 1rem;
+}
+.lote input {
+  flex: 1; min-width: 0; padding: 8px 10px; font-size: 1.1rem; font-weight: 700;
+  border: 2px solid var(--linea); border-radius: 8px; background: var(--panel);
+}
+
+/* Las dos ranuras: Caja e IMEI */
+.ranuras { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ranura {
+  background: var(--panel); border: 2px dashed var(--linea); border-radius: 8px;
+  padding: 8px 10px; min-height: 64px; display: flex; flex-direction: column; gap: 2px;
+}
+.ranura.actual { border-style: solid; border-color: var(--tinta); }
+.ranura.lista { border-style: solid; border-color: var(--ok); }
+.ranura-nombre { font-size: .8rem; color: var(--tenue); font-weight: 600; }
+.ranura-valor { font-size: .95rem; font-variant-numeric: tabular-nums; word-break: break-all; }
+
+.entrada { display: flex; gap: 8px; margin-top: 10px; }
+#lector {
+  flex: 1; min-width: 0; font-size: 1.15rem; padding: 12px; border: 2px solid var(--tinta);
+  border-radius: 8px; background: var(--panel); font-variant-numeric: tabular-nums;
+}
+.icono {
+  width: 52px; border: 2px solid var(--linea); border-radius: 8px; background: var(--panel); font-size: 1.3rem;
+}
+.icono.activo { border-color: var(--enfoque); }
+
+/* Resultado: lo más importante de la pantalla */
+.resultado {
+  margin-top: 12px; border-radius: 12px; padding: 18px 16px; min-height: 190px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  background: var(--panel); border: 2px solid var(--linea);
+}
+.resultado p { margin: 0; }
+.res-simbolo { font-size: 3.4rem; line-height: 1; font-weight: 700; }
+.res-titulo { font-size: 1.5rem; font-weight: 700; margin-top: 6px !important; }
+.res-detalle { font-size: 1rem; margin-top: 6px !important; max-width: 34ch; }
+.resultado.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+.resultado.error { background: var(--error); border-color: var(--error); color: #fff; }
+.resultado.aviso { background: #FFF4DB; border-color: var(--aviso); }
+.resultado.espera { border-color: var(--tinta); }
+@media (prefers-reduced-motion: no-preference) {
+  .resultado.ok, .resultado.error { animation: golpe .18s ease-out; }
+  @keyframes golpe { from { transform: scale(.97); } to { transform: scale(1); } }
+}
+
+.primario, .secundario, .peligro {
+  display: block; width: 100%; margin-top: 10px; padding: 12px; border-radius: 8px; font-weight: 600;
+}
+.primario { background: var(--tinta); color: #fff; border: 0; }
+.secundario { background: var(--panel); border: 2px solid var(--tinta); }
+.peligro { background: var(--panel); border: 2px solid var(--error); color: var(--error); }
+
+.subtitulo { font-size: 1rem; margin: 18px 0 6px; }
+.historial { list-style: none; margin: 0; padding: 0; }
+.historial li {
+  background: var(--panel); border-left: 5px solid var(--ok); border-radius: 6px;
+  padding: 8px 10px; margin-bottom: 6px; font-size: .9rem;
+}
+.historial li.duplicado { border-left-color: var(--error); }
+.historial .h-imei { font-variant-numeric: tabular-nums; font-weight: 600; }
+.historial .h-meta { color: var(--tenue); font-size: .8rem; }
+
+/* Pendientes */
+.resumen { margin: 0 0 8px; font-weight: 600; }
+.buscar { width: 100%; padding: 10px; border: 2px solid var(--linea); border-radius: 8px; background: var(--panel); }
+.grupo { margin-top: 12px; }
+.grupo h3 { font-size: .95rem; margin: 0 0 4px; }
+.grupo h3 small { color: var(--tenue); font-weight: 400; }
+.grupo ul { list-style: none; margin: 0; padding: 0; }
+.grupo li {
+  background: var(--panel); padding: 6px 10px; border-radius: 6px; margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ajustes */
+.campo { display: block; margin-top: 10px; font-weight: 600; font-size: .9rem; }
+.campo input { display: block; width: 100%; margin-top: 4px; padding: 10px; border: 2px solid var(--linea); border-radius: 8px; background: var(--panel); font-weight: 400; }
+.bloque { margin-top: 22px; }
+.info { margin: 0; color: var(--tenue); font-size: .9rem; }
+details summary { cursor: pointer; font-weight: 600; }
+
+/* Pestañas */
+.pestanas { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--panel); border-top: 1px solid var(--linea); }
+.pestanas button { border: 0; background: transparent; padding: 14px 4px; font-weight: 600; color: var(--tenue); }
+.pestanas button.activa { color: var(--tinta); box-shadow: inset 0 3px 0 var(--tinta); }

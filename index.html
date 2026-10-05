@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#172033">
+  <title>IMEI Validador</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="barra-fila">
+      <strong class="marca">IMEI Validador</strong>
+      <button id="estadoEnvio" class="envio" type="button" aria-live="polite">Sin conexión</button>
+    </div>
+    <button id="quienDonde" class="quien" type="button">Elige tu nombre en Ajustes</button>
+  </header>
+
+  <main>
+    <!-- ESCANEAR -->
+    <section id="vistaEscanear" class="vista activa" aria-label="Escanear">
+      <label class="lote">Lote
+        <input id="lote" type="text" inputmode="text" autocomplete="off" placeholder="Ej. 401">
+      </label>
+
+      <div class="ranuras">
+        <div id="ranuraCaja" class="ranura actual">
+          <span class="ranura-nombre">Caja</span>
+          <span id="valorCaja" class="ranura-valor">Escanea el código de barras</span>
+        </div>
+        <div id="ranuraImei" class="ranura">
+          <span class="ranura-nombre">IMEI</span>
+          <span id="valorImei" class="ranura-valor">—</span>
+        </div>
+      </div>
+
+      <div class="entrada">
+        <input id="lector" type="text" inputmode="none" autocomplete="off" autocapitalize="off"
+               spellcheck="false" placeholder="Aprieta el gatillo" aria-label="Lectura del escáner">
+        <button id="teclado" class="icono" type="button" title="Escribir a mano" aria-label="Escribir a mano">⌨</button>
+      </div>
+
+      <div id="resultado" class="resultado neutro" role="status" aria-live="assertive">
+        <span id="resSimbolo" class="res-simbolo">▤</span>
+        <p id="resTitulo" class="res-titulo">Escanea la caja</p>
+        <p id="resDetalle" class="res-detalle">Primero el código de barras de la caja, luego el IMEI.</p>
+      </div>
+
+      <button id="cambiarCaja" class="secundario" type="button" hidden>Escanear otra caja</button>
+
+      <h2 class="subtitulo">Mis últimas lecturas</h2>
+      <ol id="historial" class="historial"></ol>
+    </section>
+
+    <!-- PENDIENTES -->
+    <section id="vistaPendientes" class="vista" aria-label="Pendientes">
+      <p id="resumenPendientes" class="resumen"></p>
+      <input id="buscarPendiente" class="buscar" type="search" placeholder="Buscar por IMEI, código o descripción">
+      <div id="listaPendientes"></div>
+    </section>
+
+    <!-- AJUSTES -->
+    <section id="vistaAjustes" class="vista" aria-label="Ajustes">
+      <label class="campo">Tu nombre
+        <input id="cfgAuditor" type="text" placeholder="Ej. Ana" autocomplete="off">
+      </label>
+      <button id="guardarAjustes" class="primario" type="button">Guardar</button>
+
+      <div class="bloque">
+        <p id="infoLista" class="info">Lista sin descargar.</p>
+        <button id="actualizarLista" class="secundario" type="button">Actualizar lista</button>
+        <button id="enviarAhora" class="secundario" type="button">Enviar lecturas ahora</button>
+      </div>
+
+      <details class="bloque">
+        <summary>Conexión (solo Viktor)</summary>
+        <label class="campo">URL del Sheet
+          <input id="cfgUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec">
+        </label>
+        <button id="guardarUrl" class="secundario" type="button">Guardar URL</button>
+        <button id="borrarLocal" class="peligro" type="button">Borrar mis lecturas guardadas en esta PDA</button>
+      </details>
+    </section>
+  </main>
+
+  <nav class="pestanas">
+    <button data-vista="vistaEscanear" class="activa" type="button">Escanear</button>
+    <button data-vista="vistaPendientes" type="button">Pendientes</button>
+    <button data-vista="vistaAjustes" type="button">Ajustes</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
