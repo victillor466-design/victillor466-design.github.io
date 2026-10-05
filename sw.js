@@ -1,6 +1,6 @@
 /* Guarda la app en la PDA para que abra aunque no haya señal.
    Las consultas al Sheet (script.google.com) no se guardan aquí. */
-const VERSION = 'imei-validador-v1';
+const VERSION = 'imei-validador-v2';
 const ARCHIVOS = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

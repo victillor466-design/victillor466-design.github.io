@@ -306,6 +306,7 @@ function pintarQuien() {
   const a = leer(CLAVES.auditor, '');
   $('quienDonde').textContent = a ? `${a}  (tocar para cambiar)` : 'Toca aquí y escribe tu nombre';
   $('lote').value = leer(CLAVES.lote, '');
+  $('cfgAuditor').value = a;
 }
 
 function mostrarVista(id) {
