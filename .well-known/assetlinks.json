@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.victillor466_design.twa",
+        "sha256_cert_fingerprints": ["4D:31:00:C6:4E:33:FD:D4:0B:9A:93:E9:4B:E0:87:8F:31:BB:EA:BC:FC:A8:95:95:EE:68:06:70:93:A6:50:F7"]
+      }
+    }]
